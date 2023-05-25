@@ -25,6 +25,8 @@ class _HomePageState extends State<HomePage> {
 
   /// [_channel] is a [WebSocketChannel] that allows listening of
   /// messages from the server and push messages to the server
+  ///
+  /// This server returns the data that it was sent last
   final _channel = WebSocketChannel.connect(
     Uri.parse('wss://echo.websocket.events'),
   );
@@ -47,6 +49,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 24),
+
+            /// Listens to messages from the server
             StreamBuilder(
               stream: _channel.stream,
               builder: (context, snapshot) {
